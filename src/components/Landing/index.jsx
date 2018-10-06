@@ -1,10 +1,12 @@
 import React from 'react';
 import './Landing.css';
+import LoginCreateAccount from '../LoginCreateAccount';
 
 export default function Landing() {
     return (
         <div className="Landing">
-            <h1>Startup Weekend</h1>
+            <LoginCreateAccount />
+            <div></div>
         </div>
     );
 };

@@ -49,7 +49,8 @@ class Login extends Component {
             <p>Login</p>
             <form onSubmit={async e => await this.submit(e, client)}>
               <input 
-                required 
+                required
+                maxLength="10" 
                 pattern="[0-9]{10}" 
                 title="10 digits, no dashes or spaces."
                 onChange={e => this.setState({ phone: e.target.value})} />

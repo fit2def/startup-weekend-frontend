@@ -12,7 +12,6 @@ const CREATE_REFERRER_MUTATION = gql`
     }
 `;
 
-//6059410477
 class CreateAccount extends Component {
     state = {
         phone: '',

@@ -14,8 +14,7 @@ function LoggedIn() {
   return (
     <div className='App'>
       <Switch>
-        <Route path='/' exact component={Landing} />
-        <Route path='/businesses' component={Businesses} />
+        <Route path='/' component={Businesses} />
         <Route path='/business/:businessId' component={BusinessProfile} />
         <Route path='/leaderboard' component={LeaderBoard} />
         <Route component={NotFound} />
@@ -36,7 +35,7 @@ class App extends Component {
             
             return data.authedReferrer
               ? LoggedIn() 
-              : <LoginOrCreate />
+              : <Landing />
           }}
         </Query>
       </BrowserRouter>
