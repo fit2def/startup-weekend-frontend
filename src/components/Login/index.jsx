@@ -3,6 +3,7 @@ import { ApolloConsumer } from 'react-apollo';
 import gql from 'graphql-tag';
 import Password from '../Password';
 import './Login.css';
+import Phone from '../Phone';
 
 const LOGIN_QUERY = gql`
   query login($phone: String!, $password: String!) {
@@ -46,16 +47,16 @@ class Login extends Component {
       <ApolloConsumer>
         {client => (
           <div className="Login">
-            <p>Login</p>
             <form onSubmit={async e => await this.submit(e, client)}>
-              <input 
-                required
-                maxLength="10" 
-                pattern="[0-9]{10}" 
-                title="10 digits, no dashes or spaces."
-                onChange={e => this.setState({ phone: e.target.value})} />
-              <Password onChange={e => this.setState({ password: e.target.value })}/>
-              <button type="submit">Submit</button>
+              <div className="mb-3">
+                <label>Phone</label>
+                <Phone onChange={e => this.setState({ phone: e.target.value })} />
+              </div>
+              <div className="mb-3">
+                <label>Password</label>
+                <Password onChange={e => this.setState({ password: e.target.value })} />
+              </div>
+              <button className="btn btn-primary btn-lg btn-block" type="submit">Sign In</button>
             </form>
           </div>
         )}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ApolloConsumer } from 'react-apollo';
 import gql from 'graphql-tag';
+import Phone from '../Phone';
 import Password from '../Password';
 import './CreateAccount.css';
 
@@ -31,40 +32,44 @@ class CreateAccount extends Component {
         createReferrer && client.writeData({
             data: {
                 authedReferrer: {
-                  __typename: 'Referrer',
-                  phone: createReferrer.phone
+                    __typename: 'Referrer',
+                    phone: createReferrer.phone
                 }
-              }
+            }
         });
 
         // otherwise fail and show some error message
 
     }
-    
+
     render() {
         return (
             <ApolloConsumer>
-            {client => (
-                <div className="CreateAccount">
-                <p>Create Account</p>
-                    <form onSubmit={async e => await this.submit(e, client)}>
-                        Phone#
-                        <input 
-                            onChange={(e) => this.setState({phone: e.target.value})}
-                            required 
-                            pattern="^[0-9]{10}$"
-                            title="10 digit phone number, no spaces or dashes."/>
-                        <label>Password</label>
-                        <Password onChange={(e) => this.setState({ password: e.target.value })}/>
-                        <label>Confirm password</label>
-                        <Password 
-                            onChange={(e) => this.setState({ confirmPassword: e.target.value })} 
-                            mustMatch={this.state.password}
-                        />
-                        <button type="submit">Submit</button>
-                    </form>
-                </div>
-            )}
+                {client => (
+                    <div className="CreateAccount">
+                        <form onSubmit={async e => await this.submit(e, client)}>
+                            <div className="mb-3">
+                                <label>Phone</label>
+                                <Phone onChange={e => this.setState({ phone: e.target.value })} />
+                            </div>
+
+                            <div className="mb-3">
+                                <label>Password</label>
+                                <Password onChange={(e) => this.setState({ password: e.target.value })} />
+                            </div>
+
+                            <div className="mb-3">
+                                <label>Confirm password</label>
+                                <Password
+                                    onChange={(e) => this.setState({ confirmPassword: e.target.value })}
+                                    mustMatch={this.state.password}
+                                />
+                            </div>
+
+                            <button className="btn btn-primary btn-lg btn-block" type="submit">Create an Account</button>
+                        </form>
+                    </div>
+                )}
             </ApolloConsumer>
         );
     }

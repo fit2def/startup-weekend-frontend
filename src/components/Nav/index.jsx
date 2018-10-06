@@ -3,42 +3,34 @@ import { NavLink, withRouter } from 'react-router-dom';
 import Logout from '../Logout';
 import './Nav.css';
 
-function Nav({ history, logout }) {
+function Nav({ history }) {
 
   const path = history.location.pathname;
 
   return (
     <nav>
-        <ul>
-          <li>
-            <NavLink
-              to='/'
-              className={path === '/'  ? 'active-link' : 'non-active-link'} >
-              HOME
+      <ul>
+        <li>
+          <NavLink
+            to='/'
+            className={path === '/' ? 'active-link' : 'non-active-link'} >
+            Find Businesses
             </NavLink>
-          </li>
-
-          <li>
-            <NavLink
-              to='/businesses'
-              className={path === '/'  ? 'active-link' : 'non-active-link'} >
-              FIND BUSINESSES
-            </NavLink>
-          </li>
-
-          <li>
-            <NavLink
-              to="/leaderboard"
-              className={path === '/'  ? 'active-link' : 'non-active-link'}>
-              LEADERBOARD
-            </NavLink>
-          </li>
+        </li>
 
         <li>
-        <Logout/>
-        </li>  
+          <NavLink
+            to='/leaderboard'
+            className={path === '/leaderboard' ? 'active-link' : 'non-active-link'} >
+            Leaderboard
+            </NavLink>
+        </li>
 
-        </ul>
+        <li>
+          <Logout />
+        </li>
+
+      </ul>
 
     </nav>
   );

@@ -16,6 +16,7 @@ const REFERRERS_QUERY = gql`
 `;
 
 function showLeaderBoard(referrers) {
+    console.log('here');
     return (
         <div className="LeaderBoard">
             <ul className="leaders">

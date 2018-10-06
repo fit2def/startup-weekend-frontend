@@ -3,6 +3,7 @@ import React from 'react';
 export default function Password({ mustMatch, onChange }) {
     return (
         <input
+            className="form-control"
             onChange={onChange}
             type="password"
             required

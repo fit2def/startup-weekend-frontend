@@ -30,8 +30,6 @@ const client = new ApolloClient({
             Mutation: {
                 logout: (_, __, { cache }) => {
                     cache.data['authedReferrer'] = null;
-                    console.log(_);
-                    console.log(__);
                 }
             }
         }
