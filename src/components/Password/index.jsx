@@ -7,10 +7,10 @@ export default function Password({ mustMatch, onChange }) {
             type="password"
             required
             maxLength="16"
-            pattern={ mustMatch || "^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" }
+            pattern={ mustMatch || "^[A-Za-z0-9-_!]{8,16}$" }
             title={ mustMatch 
                 ? "Passwords must match"
-                : "Minimum eight characters, at least one letter and one number."
+                : "Eight to 16 characters"
             }/>
     );
 }

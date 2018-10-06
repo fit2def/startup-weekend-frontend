@@ -1,31 +1,22 @@
 import { gql } from 'apollo-boost';
 
-const USER_QUERY = gql`
-    query getUser {
-        user @client {
-            id
-            username 
+const AUTHED_REFERRER_QUERY = gql`
+    query getAuthedReferrer {
+        authedReferrer @client {
+            phone
         }
     }
 `;
 
-const AUTH_USER_MUTATION = gql`
-    mutation authUserMutation($username: String!, $id: ID!) {
-        authUser(username: $username, id: $id) @client
-    }
-`;
-
-const CREATE_USER_MUTATION = gql`
-    mutation($username: String!, $password: String!) {
-        createUser(username: $username, password: $password ) {
-            id
-            username
+const CREATE_REFERRER_MUTATION = gql`
+    mutation($phone: String!, $password: String!) {
+        createReferrer(phone: $phone, password: $password ) {
+            phone
         }
     }
 `;
 
 export {
-    USER_QUERY,
-    AUTH_USER_MUTATION,
-    CREATE_USER_MUTATION
+    AUTHED_REFERRER_QUERY,
+    CREATE_REFERRER_MUTATION
 };

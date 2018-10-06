@@ -1,22 +1,20 @@
 import React, { Component } from 'react';
 import { ApolloConsumer } from 'react-apollo';
 import gql from 'graphql-tag';
-import { AUTH_USER_MUTATION } from '../../queries';
 import Password from '../Password';
 import './CreateAccount.css';
 
-const CREATE_USER_MUTATION = gql`
-    mutation($username: String!, $password: String!) {
-        createUser(username: $username, password: $password ) {
-            id
-            username
+const CREATE_REFERRER_MUTATION = gql`
+    mutation($phone: String!, $password: String!) {
+        createReferrer(phone: $phone, password: $password ) {
+            phone
         }
     }
 `;
 
 class CreateAccount extends Component {
     state = {
-        username: '',
+        phone: '',
         password: '',
         confirmPassword: ''
     }
@@ -24,16 +22,17 @@ class CreateAccount extends Component {
     async submit(e, client) {
         e.preventDefault();
         const { data } = await client.query({
-            query: CREATE_USER_MUTATION,
+            query: CREATE_REFERRER_MUTATION,
             variables: this.state
         });
 
-        const { user } = data;
+        const { referrer } = data;
 
-        user && client.query({
-            query: AUTH_USER_MUTATION,
-            variables: user
-        })
+        referrer && client.writeData({
+            data: {
+                referrer
+            }
+        });
 
         // otherwise fail and show some error message
 
@@ -44,14 +43,14 @@ class CreateAccount extends Component {
             <ApolloConsumer>
             {client => (
                 <div className="CreateAccount">
-                <p>Create an Account</p>
+                <p>Create Account</p>
                     <form onSubmit={async e => await this.submit(e, client)}>
-                        username
+                        Phone#
                         <input 
-                            onChange={(e) => this.setState({username: e.target.value})}
+                            onChange={(e) => this.setState({phone: e.target.value})}
                             required 
-                            pattern="[A-Za-z\d]{5,16}"
-                            title="5 to 16 alphanumeric characters, no spaces"/>
+                            pattern="^[0-9]{10}$"
+                            title="10 digit phone number, no spaces or dashes."/>
                         <label>Password</label>
                         <Password onChange={(e) => this.setState({ password: e.target.value })}/>
                         <label>Confirm password</label>

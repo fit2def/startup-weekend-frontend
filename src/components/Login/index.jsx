@@ -1,24 +1,20 @@
 import React, { Component } from 'react';
 import { ApolloConsumer } from 'react-apollo';
 import gql from 'graphql-tag';
-import { AUTH_USER_MUTATION } from '../../queries';
 import Password from '../Password';
 import './Login.css';
 
 const LOGIN_QUERY = gql`
-  query loginQuery($username: String!, $password: String!) {
-    login(username: $username, password: $password) {
-      user {
-        id
-        username
-      }
+  query login($phone: String!, $password: String!) {
+    login(phone: $phone, password: $password) {
+      phone
     }
   }
 `;
 
 class Login extends Component {
   state = {
-    username: '',
+    phone: '',
     password: ''
   };
 
@@ -30,14 +26,15 @@ class Login extends Component {
       variables: this.state
     });
 
-    const { user } = data;
 
-    user && client.query({
-      query: AUTH_USER_MUTATION,
-      variables: user
-    });
+    const { referrer } = data;
 
-    // otherwise fail and show some error messaging
+    referrer && client.writeData({
+      data: {
+        authedReferrer: referrer 
+      }
+    })
+
   }
 
   render() {
@@ -47,7 +44,11 @@ class Login extends Component {
           <div className="Login">
             <p>Login</p>
             <form onSubmit={async e => await this.submit(e, client)}>
-              <input required onChange={e => this.setState({ username: e.target.value})} />
+              <input 
+                required 
+                pattern="[0-9]{10}" 
+                title="10 digits, no dashes or spaces."
+                onChange={e => this.setState({ phone: e.target.value})} />
               <Password onChange={e => this.setState({ password: e.target.value })}/>
               <button type="submit">Submit</button>
             </form>

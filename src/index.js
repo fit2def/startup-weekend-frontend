@@ -22,12 +22,6 @@ const client = new ApolloClient({
             isConnected: true
         },
         resolvers: {
-            Mutation: {
-                updateNetworkStatus: (_, { isConnected }, { cache }) => {
-                    cache.writeData({ data: { isConnected } });
-                    return null;
-                }
-            }
         }
     }
 });
