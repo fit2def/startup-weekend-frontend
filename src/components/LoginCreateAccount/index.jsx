@@ -25,7 +25,7 @@ class LoginCreateAccount extends Component {
             {this.state.selected ? 'Log In' : 'Create Account'}
             </button>
             </div>
-            <hr class="mb-4"></hr>
+            <hr className="mb-4"></hr>
             <div className="md-3">
             {
                 this.state.selected 

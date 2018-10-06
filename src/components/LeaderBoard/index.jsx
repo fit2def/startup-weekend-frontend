@@ -16,13 +16,23 @@ const REFERRERS_QUERY = gql`
 `;
 
 function showLeaderBoard(referrers) {
-    console.log('here');
     return (
         <div className="LeaderBoard">
             <ul className="leaders">
-                {referrers.map(r => (
-                    <li>{r.phone}</li>
-                ))}
+                {
+                    referrers.map(referrer => ({
+                        phone: referrer.phone,
+                        usedReferrals: referrer.referrals.reduce((acc, r) =>
+                            r.used ? acc + 1 : acc, 0)
+                    }))
+                    .sort((r2, r1) => r1.usedReferrals - r2.usedReferrals)
+                    .map((r, i) => (
+                        <li key={`${i}`.repeat(6) + r.phone.substring(6)}>
+                            <div>******{r.phone.substring(6)}</div>
+                            <div>{r.usedReferrals}</div>
+                        </li>
+                    ))
+                }
             </ul>
         </div>
     );
