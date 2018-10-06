@@ -26,12 +26,16 @@ class Login extends Component {
       variables: this.state
     });
 
+    const { login } = data;
 
-    const { referrer } = data;
+    console.log(login)
 
-    referrer && client.writeData({
+    login && client.writeData({
       data: {
-        authedReferrer: referrer 
+        authedReferrer: {
+          __typename: 'Referrer',
+          phone: login.phone
+        }
       }
     })
 

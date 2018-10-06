@@ -13,7 +13,7 @@ function LoggedIn() {
       <Switch>
         <Route path='/' exact component={Landing} />
         <Route component={NotFound} />
-      </Switch>)
+      </Switch>
       <Nav />
     </div>
   );
@@ -24,10 +24,11 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Query query={AUTHED_REFERRER_QUERY}>
-          {({ loading, error, data }) => { 
+          {({ loading, error, data }) => {
+            if (error) return <NotFound />
             if (loading) return <p>Loading...</p>
             
-            return data.referrer
+            return data.authedReferrer
               ? LoggedIn() 
               : <LoginOrCreate />
           }}
