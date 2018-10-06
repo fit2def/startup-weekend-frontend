@@ -16,7 +16,7 @@ persistCache({
 
 const client = new ApolloClient({
     cache,
-    uri: 'http://localhost:4000/graphql',
+    uri: 'http://10.204.35.23:4000/graphql',
     clientState: {
         defaults: {
             isConnected: true
