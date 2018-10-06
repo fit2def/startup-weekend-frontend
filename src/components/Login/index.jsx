@@ -28,8 +28,6 @@ class Login extends Component {
 
     const { login } = data;
 
-    console.log(login)
-
     login && client.writeData({
       data: {
         authedReferrer: {
@@ -38,6 +36,8 @@ class Login extends Component {
         }
       }
     })
+
+    //otherwise fail 
 
   }
 

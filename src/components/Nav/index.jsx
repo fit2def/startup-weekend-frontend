@@ -32,6 +32,22 @@ function Nav({ history, logout }) {
             </NavLink>
           </li>
 
+          <li className="nav-item">
+            <NavLink
+              to='/businesses'
+              className={path === '/'  ? 'active-link' : 'non-active-link'} >
+              FIND BUSINESSES
+            </NavLink>
+          </li>
+
+          <li className="nav-item">
+            <NavLink
+              to="/leaderboard"
+              className={path === '/'  ? 'active-link' : 'non-active-link'}>
+              LEADERBOARD
+            </NavLink>
+          </li>
+
         </ul>
         <Logout logout={logout}/>
       </div>

@@ -5,6 +5,9 @@ import { AUTHED_REFERRER_QUERY } from '../../queries';
 import Nav from '../Nav';
 import Landing from '../Landing';
 import LoginOrCreate from '../LoginCreateAccount';
+import BusinessProfile from '../BusinessProfile';
+import Businesses from '../Businesses';
+import LeaderBoard from '../LeaderBoard';
 import NotFound from '../NotFound';
 
 function LoggedIn() {
@@ -12,6 +15,9 @@ function LoggedIn() {
     <div className='App'>
       <Switch>
         <Route path='/' exact component={Landing} />
+        <Route path='/businesses' component={Businesses} />
+        <Route path='/business/:businessId' component={BusinessProfile} />
+        <Route path='/leaderboard' component={LeaderBoard} />
         <Route component={NotFound} />
       </Switch>
       <Nav />

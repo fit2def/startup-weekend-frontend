@@ -24,7 +24,6 @@ const client = new ApolloClient({
         resolvers: {
             Query: {
                 authedReferrer: (_, __, { cache }) => {
-                    console.log(cache);
                     return cache.data['authedReferrer'];
                 }
             }

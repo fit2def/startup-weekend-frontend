@@ -5,13 +5,14 @@ import Password from '../Password';
 import './CreateAccount.css';
 
 const CREATE_REFERRER_MUTATION = gql`
-    mutation($phone: String!, $password: String!) {
-        createReferrer(phone: $phone, password: $password ) {
+    mutation createReferrerMutation($phone: String!, $password: String!) {
+        createReferrer(phone: $phone, password: $password) {
             phone
         }
     }
 `;
 
+//6059410477
 class CreateAccount extends Component {
     state = {
         phone: '',
@@ -21,17 +22,20 @@ class CreateAccount extends Component {
 
     async submit(e, client) {
         e.preventDefault();
-        const { data } = await client.query({
-            query: CREATE_REFERRER_MUTATION,
+        const { data } = await client.mutate({
+            mutation: CREATE_REFERRER_MUTATION,
             variables: this.state
         });
 
-        const { referrer } = data;
+        const { createReferrer } = data;
 
-        referrer && client.writeData({
+        createReferrer && client.writeData({
             data: {
-                referrer
-            }
+                authedReferrer: {
+                  __typename: 'Referrer',
+                  phone: createReferrer.phone
+                }
+              }
         });
 
         // otherwise fail and show some error message
