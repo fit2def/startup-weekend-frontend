@@ -3,6 +3,8 @@ import { ApolloConsumer } from 'react-apollo';
 import gql from 'graphql-tag';
 import Phone from '../Phone';
 import { AUTHED_REFERRER_QUERY } from '../../queries';
+import apexfam from './apexfam.jpg';
+import './BusinessProfile.css';
 
 const CREATE_REFERRAL_MUTATION = gql`
     mutation createReferral($referrerPhone: String!, $referreePhone: String!, $message: String!) {
@@ -12,15 +14,15 @@ const CREATE_REFERRAL_MUTATION = gql`
     }
 `;
 
-
 class BusinessProfile extends Component {
     state = {
         phone: '',
         sentMessage: '',
         errorMessage: '',
         business: {
-            name: 'Guardian Pest Control',
-            address: ''
+            name: 'APEX Window Cleaning',
+            address: 'Ste. D PMB #123, 3305 East Clark Ln, Columbia, MO 65202',
+            phone: '573-356-5786'
         }
     };
 
@@ -38,7 +40,7 @@ class BusinessProfile extends Component {
             variables: {
                 referrerPhone: authedReferrer.phone,
                 referreePhone: this.state.phone,
-                message: 'Stock text'
+                message: `${this.state.phone}: Your ReferMe code for ${this.state.business.name} is ${authedReferrer.phone}`
             }
         })
 
@@ -62,34 +64,37 @@ class BusinessProfile extends Component {
         return (
             <ApolloConsumer>
                 {client => (
-                    <div className="container">
-                    <div className="row py-5">
-                         <div className="col-md-6">
-                           <div className="card mb-6 box-shadow">
-                               <img className="card-img-top" alt="test" src="https://lh5.googleusercontent.com/p/AF1QipM-8aOKoeDGQqFVZK1KhaeO9-WH0Qfy0eJcVdAu=w213-h160-k-no" />
-                             <div className="card-body">
-                                 <h3>Guardian Pest Control</h3>
-                                 <p className="card-text">Pest Control<br></br>Columbia</p>
-                                 
-                                         <h5 >Send to Friend</h5>
-                         <hr className="mb-4"></hr>
-                                
-                                     <form onSubmit={(e) => this.submit(e, client)}>
-                                     <div className="mb-3">
-                           <label>Phone Number</label>
-                          
-                        <Phone onChange={e => this.setState({phone: e.target.value})} />
-                        <div>{this.state.sentMessage}</div>
-                        <div>{this.state.errorMessage}</div>
-                        </div>
-                        <button className="btn btn-primary btn-lg btn-block" type="submit">Refer Me</button>
-                        </form>
-                               
-                               </div>
-                             </div>
+                    <div className="container profile">
+                     <div className="row py-5">
+                     <div className="col-md-6">
+                       <div className="card mb-6 box-shadow">
+                           <img className="card-img-top" alt="test" src={apexfam} />
+                         <div className="card-body">
+                             <h3>APEX Window Cleaning</h3>
+                             <p className="card-text"><i class="fas fa-map-marker-alt"></i><b>Address</b></p>
+                             <p className="card-text">{this.state.business.address}</p>
+                             <p className="card-text"><i class="fas fa-phone"></i> <b>Phone</b></p>
+                             <p className="card-text"> {this.state.business.phone}</p>
+                             
+                                     <h5 className="send-header">Send to Friend</h5>
+                     <hr className="mb-4"></hr>
+                            
+                                 <form onSubmit={(e) => this.submit(e, client)}>
+                                 <div className="mb-3">
+                       <label>Phone Number</label>
+                      
+                    <Phone onChange={e => this.setState({phone: e.target.value})} />
+                    { this.state.sentMessage && <div className="alert alert-success mt-3" role="alert">{this.state.sentMessage}</div>}
+                    { this.state.errorMessage && <div className="alert alert-warning mt-3" role="alert">{this.state.errorMessage}</div>}
+                    
+                    </div>
+                    <button className="btn btn-primary btn-lg btn-block" type="submit">Refer Me</button>
+                    </form>
+                           </div>
                            </div>
                          </div>
-                    </div>
+                       </div>
+                     </div>
                 )}
                 
             </ApolloConsumer>

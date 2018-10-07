@@ -1,6 +1,7 @@
 import { gql } from 'apollo-boost';
 
-const AUTHED_REFERRER_QUERY = gql`
+const AUTHED_REFERRER_QUERY = 
+gql`
     query getAuthedReferrer {
         authedReferrer @client {
             phone

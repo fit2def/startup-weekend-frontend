@@ -17,31 +17,45 @@ const REFERRERS_QUERY = gql`
 
 function showLeaderBoard(referrers) {
     return (
-        <div className="LeaderBoard">
-            <ul className="leaders">
-                {
-                    referrers.map(referrer => ({
-                        phone: referrer.phone,
-                        usedReferrals: referrer.referrals.reduce((acc, r) =>
-                            r.used ? acc + 1 : acc, 0)
-                    }))
-                    .sort((r2, r1) => r1.usedReferrals - r2.usedReferrals)
-                    .map((r, i) => (
-                        <li key={`${i}`.repeat(6) + r.phone.substring(6)}>
-                            <div>******{r.phone.substring(6)}</div>
-                            <div>{r.usedReferrals}</div>
-                        </li>
-                    ))
-                }
-            </ul>
+        <div className="album py-5">
+            <div className="container">
+                <h1 className="test-center">Leaderboard</h1>
+                <table class="table table-bordered table-striped mt-4">
+                    <thead>
+                        <tr>
+                        <th>Rank</th>
+                        <th>User</th>
+                        <th>Referrals</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {
+                        referrers.map(referrer => ({
+                            phone: referrer.phone,
+                            usedReferrals: referrer.referrals.reduce((acc, r) =>
+                                r.used ? acc + 1 : acc, 0)
+                        }))
+                            .sort((r2, r1) => r1.usedReferrals - r2.usedReferrals)
+                            .slice(0, 10)
+                            .map((r, i) => (
+                                <tr  key={`${i}`.repeat(6) + r.phone.substring(6)}>
+                                     <td>{i + 1}</td>
+                                    <td>******{r.phone.substring(6)}</td>
+                                    <td>{r.usedReferrals}</td>
+                                    </tr>
+                            ))
+                    }
+                </tbody>
+</table>
+            </div>
         </div>
     );
 }
 
-export default function LeaderBoard(props){
+export default function LeaderBoard(props) {
     return (
-        <Query query={REFERRERS_QUERY}>
-            {({ error, loading, data}) => {
+        <Query query={REFERRERS_QUERY} fetchPolicy="cache-and-network">
+            {({ error, loading, data }) => {
                 if (error) return <NotFound />
                 if (loading) return <p>Loading...</p>
                 return showLeaderBoard(data.referrers);

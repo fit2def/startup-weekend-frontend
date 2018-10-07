@@ -19,21 +19,8 @@ class Portal extends Component {
         errorMessage: ''
     };
 
-    clearState() {
-        this.setState({
-            referrerPhone: '',
-            referreePhone: '',
-            usedMessage: '',
-            errorMessage: ''
-        });
-    }
-
     async submit(e, client) {
         e.preventDefault();
-
-        this.clearState();
-
-        console.log(this.state);
 
         const { data } = await client.mutate({
             mutation: USE_REFERRAL_MUTATION,
@@ -42,6 +29,7 @@ class Portal extends Component {
                 referreePhone: this.state.referreePhone
             }
         });
+
 
         if (!data.useReferral) {
             this.setState({
@@ -52,22 +40,32 @@ class Portal extends Component {
         }
 
         this.setState({
-            usedMessage: `Referral code applied for ${data.useReferral.phone}.`
+            usedMessage: `Referral code applied for ${data.useReferral.referrerPhone}.`
         });
-
     }
 
     render() {
         return (
             <ApolloConsumer>
                 {client => (
-                    <div>
+                     <div className="album py-5">
+                     <div className="container">
+                         <h1 className="test-center">Business Portal</h1>
                         <form onSubmit={(e) => this.submit(e, client)}>
-                            <Phone onChange={(e) => this.setState({ referrerPhone: e.target.value })} />
-                            <Phone onChange={(e) => this.setState({ referreePhone: e.target.value })} />
+                            <div className="mb-3">
+                                <label>Customer</label>
+                                <Phone onChange={(e) => this.setState({ referreePhone: e.target.value })} />
+                            </div>
+                            <div className="mb-3">
+                                <label>Referrer</label>
+                                <Phone onChange={(e) => this.setState({ referrerPhone: e.target.value })} />
+                            </div>
                             <button type="submit">Apply code</button>
+                            { this.state.sentMessage && <div className="alert alert-success mt-3" role="alert">{this.state.sentMessage}</div>}
+                            { this.state.errorMessage && <div className="alert alert-warning mt-3" role="alert">{this.state.errorMessage}</div>}
                         </form>
-                    </div>
+                        </div>
+                        </div>
                 )
                 }
             </ApolloConsumer>

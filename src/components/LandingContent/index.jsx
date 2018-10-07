@@ -26,8 +26,8 @@ export default function LandingContent() {
 
                 <div className="col-lg-3">
                     <img className="rounded-circle" src={shop} alt="stuff"></img>
-                    <h3>Choose the business you'd like to refer.</h3>
-                    <p>Find your business from among our partners.</p>
+                    <h3>Become a referrer</h3>
+                    <p>Join our network of trusted businesses to start making money!</p>
                     <hr className="mb-4"></hr>
                 </div>
 
@@ -35,14 +35,14 @@ export default function LandingContent() {
                 <div className="col-lg-3">
                     <img className="rounded-circle" src={ladies} alt="stuff"></img>
                     <h3>Send the referral code</h3>
-                    <p>Enter your friend's phone number and send the code via text. They get a discount, and you get paid for the referral. It's that easy.</p>
+                    <p>Enter your friend's phone number and send the code via text. After the code is redeemed, they get a discount, and you get paid for the referral. It's that easy.</p>
                     <hr className="mb-4"></hr>
                 </div>
 
                 <div className="col-lg-3">
                     <img className="rounded-circle" src={moneytime} alt="stuff" ></img>
                     <h3>Get paid!</h3>
-                    <p>Redemption of rewards is easy. We'll get your rewards to you via Venmo or a pre-paid Visa giftcard.</p>
+                    <p>Redemption of rewards is easy and come in a variety of forms, from store credit to cash money.</p>
                     <hr className="mb-4"></hr>
                 </div>
 

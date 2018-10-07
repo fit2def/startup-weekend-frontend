@@ -1,7 +1,7 @@
 import React from 'react';
-import './Landing.css';
 import LoginCreateAccount from '../LoginCreateAccount';
 import LandingContent from '../LandingContent';
+import './Landing.css';
 
 export default function Landing() {
     return (

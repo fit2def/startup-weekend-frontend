@@ -20,7 +20,7 @@ function Nav({ history }) {
             to='/leaderboard'
             className={path === '/leaderboard' ? 'nav-link active-link border-left border-right' : 'nav-link non-active-link border-left border-right'} >
            <i className="fas fa-trophy"></i>
-           Leader
+           Leaders
             </NavLink>
           <Logout />
 
