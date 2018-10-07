@@ -62,14 +62,33 @@ class BusinessProfile extends Component {
         return (
             <ApolloConsumer>
                 {client => (
-                    <div className="BusinessProfile" >
-                        <form onSubmit={(e) => this.submit(e, client)}>
-                            enter ur frand's phone fam
+                    <div className="container">
+                    <div className="row py-5">
+                         <div className="col-md-6">
+                           <div className="card mb-6 box-shadow">
+                               <img className="card-img-top" alt="test" src="https://lh5.googleusercontent.com/p/AF1QipM-8aOKoeDGQqFVZK1KhaeO9-WH0Qfy0eJcVdAu=w213-h160-k-no" />
+                             <div className="card-body">
+                                 <h3>Guardian Pest Control</h3>
+                                 <p className="card-text">Pest Control<br></br>Columbia</p>
+                                 
+                                         <h5 >Send to Friend</h5>
+                         <hr className="mb-4"></hr>
+                                
+                                     <form onSubmit={(e) => this.submit(e, client)}>
+                                     <div className="mb-3">
+                           <label>Phone Number</label>
+                          
                         <Phone onChange={e => this.setState({phone: e.target.value})} />
                         <div>{this.state.sentMessage}</div>
                         <div>{this.state.errorMessage}</div>
-                        <button type="submit">send code</button>
+                        </div>
+                        <button className="btn btn-primary btn-lg btn-block" type="submit">Refer Me</button>
                         </form>
+                               
+                               </div>
+                             </div>
+                           </div>
+                         </div>
                     </div>
                 )}
                 

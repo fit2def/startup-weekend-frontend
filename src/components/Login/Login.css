@@ -3,8 +3,7 @@
     text-align: center;
   }
   .marketing h2 {
-    font-weight: 400;
-    text-align: center;
+    margin: 0 auto 2em;
   }
   .marketing .col-lg-3 p {
     margin-right: .75rem;
@@ -12,6 +11,7 @@
   }
 
   .rounded-circle {
-      height: auto;
-      width:  70%;
+      height: 200px;
+      width:  200px;
+      margin-bottom:1em;
   }

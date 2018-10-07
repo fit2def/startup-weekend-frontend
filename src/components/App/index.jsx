@@ -8,8 +8,17 @@ import BusinessProfile from '../BusinessProfile';
 import Businesses from '../Businesses';
 import LeaderBoard from '../LeaderBoard';
 import NotFound from '../NotFound';
+import Portal from '../Portal';
+import Logout from '../Logout';
 
-function LoggedIn() {
+function LoggedIn(data) {
+  if (data.authedReferrer.phone === '5732533829') {
+    return <div>
+        <Portal />
+        <Logout />
+      </div>; 
+  }
+
   return (
     <div className='App'>
       <Switch>
@@ -32,8 +41,9 @@ class App extends Component {
             if (error) return <NotFound />
             if (loading) return <p>Loading...</p>
             
+            
             return data.authedReferrer
-              ? LoggedIn() 
+              ? LoggedIn(data) 
               : <Landing />
           }}
         </Query>

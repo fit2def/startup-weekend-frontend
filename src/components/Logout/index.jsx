@@ -23,9 +23,10 @@ class Logout extends Component {
         return (
             <ApolloConsumer>
                 {client => (
-                    <button onClick={async e => await this.logout(client)}>
-                        LOGOUT
-                    </button>
+                    <button className="btn btn-link nav-link  non-active-link" onClick={async e => await this.logout(client)}>
+                      <i className="fas fa-sign-out-alt"></i>
+                    Sign Out
+                </button>
                 )}
             </ApolloConsumer>
         )
