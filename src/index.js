@@ -17,7 +17,7 @@ persistCache({
 
 const client = new ApolloClient({
     cache,
-    uri: 'http://10.204.35.23:4000/graphql',
+    uri: 'https://referme-server.herokuapp.com/graphql',
     clientState: {
         defaults: {
             isConnected: true

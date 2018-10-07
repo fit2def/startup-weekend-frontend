@@ -3,6 +3,7 @@ import React from 'react';
 export default function Phone(props) {
     return (
         <input
+            type="phone"
             className="form-control"
             required
             maxLength="10"

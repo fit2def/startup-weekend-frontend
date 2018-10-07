@@ -3,3 +3,19 @@
   padding: 0;
 }
 
+.refer-blue-bk{
+background-color:#009ece;
+}
+
+.refer-green-bk{
+  background-color:#99ca3c;
+  border-color:#99ca3c;
+
+}
+
+
+.refer-green-bk:hover, .refer-green-bk:active{
+  background-color:#99ca3c78 !important;
+  border-color:#99ca3c78 !important;
+  
+}

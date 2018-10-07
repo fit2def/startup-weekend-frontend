@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import apexfam from './apexfam.jpg';
+import './Businesses.css';
 
 export default function Businesses(props) {
     return (
@@ -15,7 +16,7 @@ export default function Businesses(props) {
                 <div className="card-body">
                     <h3>APEX Window Cleaning</h3>
                     <p className="card-text">Columbia, MO</p>
-                    <NavLink to='/business' className="btn btn-outline-info btn-block">Refer Me</NavLink>
+                    <NavLink to='/business' className="btn btn-primary btn-block refer-green-bk">Select APEX Window Cleaning</NavLink>
                   </div>
                 </div>
               </div>

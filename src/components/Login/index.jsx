@@ -16,7 +16,8 @@ const LOGIN_QUERY = gql`
 class Login extends Component {
   state = {
     phone: '',
-    password: ''
+    password: '',
+    errorMessage: ''
   };
 
   async submit(e, client) {
@@ -29,7 +30,14 @@ class Login extends Component {
 
     const { login } = data;
 
-    login && client.writeData({
+    if (!login) {
+      this.setState({
+        errorMessage: 'Failed to sign in.'
+      })
+      return;
+    }
+
+    client.writeData({
       data: {
         authedReferrer: {
           __typename: 'Referrer',
@@ -37,8 +45,6 @@ class Login extends Component {
         }
       }
     })
-
-    //otherwise fail 
 
   }
 
@@ -56,7 +62,8 @@ class Login extends Component {
                 <label>Password</label>
                 <Password onChange={e => this.setState({ password: e.target.value })} />
               </div>
-              <button className="btn btn-primary btn-lg btn-block" type="submit">Sign In</button>
+              { this.state.errorMessage && <div className="alert alert-warning mt-3" role="alert">{this.state.errorMessage}</div>}
+              <button className="btn btn-primary btn-lg btn-block refer-green-bk" type="submit">Sign In</button>
             </form>
           </div>
         )}

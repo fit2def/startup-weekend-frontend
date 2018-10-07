@@ -1,3 +1,9 @@
-.LeaderBoard {
-    
+
+.table thead th {
+    background-color: #009ece !important;
+    color: #ffffff;
+}
+
+table tr:nth-child(1) {
+    font-weight: bold;
 }

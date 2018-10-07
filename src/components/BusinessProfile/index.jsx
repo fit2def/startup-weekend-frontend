@@ -29,6 +29,11 @@ class BusinessProfile extends Component {
     async submit(e, client) {
         e.preventDefault();
 
+        this.setState({
+            sentMessage: '',
+            errorMessage: ''
+        })
+
         const { data } = await client.query({
             query: AUTHED_REFERRER_QUERY
         });
@@ -71,9 +76,9 @@ class BusinessProfile extends Component {
                            <img className="card-img-top" alt="test" src={apexfam} />
                          <div className="card-body">
                              <h3>APEX Window Cleaning</h3>
-                             <p className="card-text"><i class="fas fa-map-marker-alt"></i><b>Address</b></p>
+                             <p className="card-text"><i className="fas fa-map-marker-alt"></i><b>Address</b></p>
                              <p className="card-text">{this.state.business.address}</p>
-                             <p className="card-text"><i class="fas fa-phone"></i> <b>Phone</b></p>
+                             <p className="card-text"><i className="fas fa-phone"></i> <b>Phone</b></p>
                              <p className="card-text"> {this.state.business.phone}</p>
                              
                                      <h5 className="send-header">Send to Friend</h5>
@@ -88,7 +93,7 @@ class BusinessProfile extends Component {
                     { this.state.errorMessage && <div className="alert alert-warning mt-3" role="alert">{this.state.errorMessage}</div>}
                     
                     </div>
-                    <button className="btn btn-primary btn-lg btn-block" type="submit">Refer Me</button>
+                    <button className="btn btn-primary btn-lg btn-block refer-green-bk" type="submit">Refer Me</button>
                     </form>
                            </div>
                            </div>

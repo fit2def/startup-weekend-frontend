@@ -17,7 +17,8 @@ class CreateAccount extends Component {
     state = {
         phone: '',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
+        errorMessage: ''
     }
 
     async submit(e, client) {
@@ -29,7 +30,12 @@ class CreateAccount extends Component {
 
         const { createReferrer } = data;
 
-        createReferrer && client.writeData({
+        if (!createReferrer) {
+            this.setState({ errorMessage: 'Failed to create account.'});
+            return;
+        }
+
+        client.writeData({
             data: {
                 authedReferrer: {
                     __typename: 'Referrer',
@@ -37,8 +43,6 @@ class CreateAccount extends Component {
                 }
             }
         });
-
-        // otherwise fail and show some error message
 
     }
 
@@ -66,7 +70,9 @@ class CreateAccount extends Component {
                                 />
                             </div>
 
-                            <button className="btn btn-primary btn-lg btn-block" type="submit">Create an Account</button>
+                            { this.state.errorMessage && <div className="alert alert-warning mt-3" role="alert">{this.state.errorMessage}</div>}
+
+                            <button className="btn btn-primary btn-lg btn-block refer-green-bk" type="submit">Create an Account</button>
                         </form>
                     </div>
                 )}

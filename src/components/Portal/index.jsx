@@ -22,6 +22,11 @@ class Portal extends Component {
     async submit(e, client) {
         e.preventDefault();
 
+        this.setState({
+            usedMessage: '',
+            errorMessage: ''
+        });
+
         const { data } = await client.mutate({
             mutation: USE_REFERRAL_MUTATION,
             variables: {
@@ -38,7 +43,7 @@ class Portal extends Component {
 
             return;
         }
-
+        
         this.setState({
             usedMessage: `Referral code applied for ${data.useReferral.referrerPhone}.`
         });
@@ -61,7 +66,7 @@ class Portal extends Component {
                                 <Phone onChange={(e) => this.setState({ referrerPhone: e.target.value })} />
                             </div>
                             <button type="submit">Apply code</button>
-                            { this.state.sentMessage && <div className="alert alert-success mt-3" role="alert">{this.state.sentMessage}</div>}
+                            { this.state.usedMessage && <div className="alert alert-success mt-3" role="alert">{this.state.usedMessage}</div>}
                             { this.state.errorMessage && <div className="alert alert-warning mt-3" role="alert">{this.state.errorMessage}</div>}
                         </form>
                         </div>

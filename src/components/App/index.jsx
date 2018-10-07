@@ -10,13 +10,14 @@ import LeaderBoard from '../LeaderBoard';
 import NotFound from '../NotFound';
 import Portal from '../Portal';
 import Logout from '../Logout';
+import Loader from '../Loader';
 
 function LoggedIn(data) {
-  if (data.authedReferrer.phone === '5733565786') { 
+  if (data.authedReferrer.phone === '5733565786') {
     return <div>
-        <Portal />
-        <Logout />
-      </div>; 
+      <Portal />
+      <Logout />
+    </div>;
   }
 
   return (
@@ -36,17 +37,18 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <Query query={AUTHED_REFERRER_QUERY}>
-          {({ loading, error, data }) => {
-            if (error) return <NotFound />
-            if (loading) return <p>Loading...</p>
-            
-            
-            return data.authedReferrer
-              ? LoggedIn(data) 
-              : <Landing />
-          }}
-        </Query>
+          <Query query={AUTHED_REFERRER_QUERY}>
+            {({ loading, error, data }) => {
+              if (error) return <NotFound />
+              if (loading) return <Loader />
+
+
+              return data.authedReferrer
+                ? LoggedIn(data)
+                : <Landing />
+            }}
+          </Query>
+     
       </BrowserRouter>
     );
   }
